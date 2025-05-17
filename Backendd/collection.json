@@ -1,0 +1,358 @@
+{
+    "info": {
+      "_postman_id": "a1b2c3d4-e5f6-7890-f1e2-d3c4b5a6f7e8",
+      "name": "Absensi Mahasiswa API",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Authentication",
+        "item": [
+          {
+            "name": "Login Admin",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{base_url}}/auth/login",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "login"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Login Petugas",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"username\": \"petugas1\",\n    \"password\": \"petugas123\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{base_url}}/auth/login",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "login"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Login Mahasiswa",
+            "request": {
+              "method": "POST",
+              "header": [],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"username\": \"mhs1\",\n    \"password\": \"mahasiswa123\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{base_url}}/auth/login",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "login"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get Profile",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/auth/profile",
+                "host": ["{{base_url}}"],
+                "path": ["auth", "profile"]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Admin Endpoints",
+        "item": [
+          {
+            "name": "Get All Users",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{admin_token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/users",
+                "host": ["{{base_url}}"],
+                "path": ["admin", "users"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Create User",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{admin_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"username\": \"newuser\",\n    \"password\": \"newpass123\",\n    \"role\": \"mahasiswa\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{base_url}}/admin/users",
+                "host": ["{{base_url}}"],
+                "path": ["admin", "users"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Delete User",
+            "request": {
+              "method": "DELETE",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{admin_token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/admin/users/5",
+                "host": ["{{base_url}}"],
+                "path": ["admin", "users", "5"]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Petugas Endpoints",
+        "item": [
+          {
+            "name": "Record Absensi",
+            "request": {
+              "method": "POST",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{petugas_token}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": {
+                "mode": "raw",
+                "raw": "{\n    \"mahasiswa_id\": 1,\n    \"matkul_id\": 3,\n    \"dosen_id\": 1,\n    \"tanggal\": \"2023-11-15\",\n    \"status\": \"hadir\",\n    \"keterangan\": \"Hadir tepat waktu\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "url": {
+                "raw": "{{base_url}}/petugas/absensi",
+                "host": ["{{base_url}}"],
+                "path": ["petugas", "absensi"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get Mata Kuliah",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{petugas_token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/petugas/matkul",
+                "host": ["{{base_url}}"],
+                "path": ["petugas", "matkul"]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Mahasiswa Endpoints",
+        "item": [
+          {
+            "name": "Get Profile Mahasiswa",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{mahasiswa_token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/mahasiswa/profile",
+                "host": ["{{base_url}}"],
+                "path": ["mahasiswa", "profile"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get Absensi Mahasiswa",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{mahasiswa_token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/mahasiswa/absensi",
+                "host": ["{{base_url}}"],
+                "path": ["mahasiswa", "absensi"]
+              }
+            },
+            "response": []
+          }
+        ]
+      },
+      {
+        "name": "Absensi Endpoints",
+        "item": [
+          {
+            "name": "Get All Absensi",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{admin_token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/absensi",
+                "host": ["{{base_url}}"],
+                "path": ["absensi"]
+              }
+            },
+            "response": []
+          },
+          {
+            "name": "Get Absensi by Date Range",
+            "request": {
+              "method": "GET",
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{admin_token}}"
+                }
+              ],
+              "url": {
+                "raw": "{{base_url}}/absensi/range?start=2023-11-01&end=2023-11-30",
+                "host": ["{{base_url}}"],
+                "path": ["absensi", "range"],
+                "query": [
+                  {
+                    "key": "start",
+                    "value": "2023-11-01"
+                  },
+                  {
+                    "key": "end",
+                    "value": "2023-11-30"
+                  }
+                ]
+              }
+            },
+            "response": []
+          }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "key": "base_url",
+        "value": "http://localhost:8000"
+      },
+      {
+        "key": "admin_token",
+        "value": ""
+      },
+      {
+        "key": "petugas_token",
+        "value": ""
+      },
+      {
+        "key": "mahasiswa_token",
+        "value": ""
+      },
+      {
+        "key": "token",
+        "value": ""
+      }
+    ],
+    "event": [
+      {
+        "listen": "prerequest",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            ""
+          ]
+        }
+      },
+      {
+        "listen": "test",
+        "script": {
+          "type": "text/javascript",
+          "exec": [
+            ""
+          ]
+        }
+      }
+    ]
+  }
